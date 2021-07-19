@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "./api"
+    },
+    {
+      "path": "./front_end"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "elixirLS.projectDir": "./api/"
+  }
+}

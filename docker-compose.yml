@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  db:
+    image: "postgres:13.1-alpine"
+    container_name: Postgres-DB
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ./front_end
+    volumes: 
+      - ./front_end:/front_end
+    container_name: Nextjs-UI
+    ports:
+      - "3000:3000"
+
+  backend:
+    image: elixir:1.12.0-alpine
+    build:
+      context: ./api
+    volumes: 
+      - ./api:/api
+    depends_on:
+      - db
+    container_name: Elixir-API
+    # ports:
+    #   - "4000:4000"
