@@ -11,7 +11,7 @@ config :api,
   ecto_repos: [Api.Repo],
   generators: [binary_id: true]
 
-  #* Config for ecto binary id
+# * Config for ecto binary id
 config :api, Api.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]

@@ -5,11 +5,14 @@ defmodule Api.Blog.Post do
   @fields [:autor, :titulo, :img_url, :conteudo]
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary
+
   schema "posts" do
-    field :autor, :string
-    field :titulo, :string
+    field :title, :string
     field :img_url, :string
-    field :conteudo, :string
+    field :body, :string
+    field :published, :boolean
+    belongs_to :user, Api.Blog.User
 
     timestamps()
   end
