@@ -4,7 +4,7 @@ defmodule Api.Blog.User do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "blog_users" do
+  schema "users" do
     field :email, :string
     field :name, :string
     field :password, :string

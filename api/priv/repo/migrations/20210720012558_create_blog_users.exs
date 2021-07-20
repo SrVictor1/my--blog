@@ -1,8 +1,8 @@
-defmodule Api.Repo.Migrations.CreateBlogUsers do
+defmodule Api.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
-    create table(:blog_users, primary_key: false) do
+    create table(:users, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :name, :string
       add :email, :string
@@ -12,6 +12,6 @@ defmodule Api.Repo.Migrations.CreateBlogUsers do
       timestamps()
     end
 
-    create unique_index(:blog_users, [:email])
+    create unique_index(:users, [:email])
   end
 end
