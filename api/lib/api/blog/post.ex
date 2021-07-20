@@ -1,4 +1,4 @@
-defmodule Api.Post do
+defmodule Api.Blog.Post do
   use Ecto.Schema
   import Ecto.Changeset
 

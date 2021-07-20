@@ -1,5 +1,6 @@
 defmodule ApiWeb.Resolver.CreateResolver do
   def call(_parent, %{input: args}, _resolution) do
-    Api.Posts.Create.call(args)
+    Api.Blog.Post.changeset(args)
+    |> Api.Blog.Posts.Create.call()
   end
 end

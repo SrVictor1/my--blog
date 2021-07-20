@@ -1,13 +1,14 @@
-defmodule Api.Posts.GetOne do
-  alias Api.{Repo, Post}
+defmodule Api.Blog.Posts.GetOne do
+  alias Api.Repo
+  alias Api.Blog.Post
   alias Ecto.UUID
 
   def call(id) do
     case UUID.cast(id) do
       {:ok, uuid} ->
         case Repo.get(Post, uuid) do
-          nil -> "user not found!"
-          user -> user
+          nil -> "Not found!"
+          date -> date
         end
 
       :error ->
