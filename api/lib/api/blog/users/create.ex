@@ -1,8 +1,7 @@
 defmodule Api.Blog.Users.Create do
-  alias Api.Repo
-
   def call(params) do
     params
-    |> Repo.insert()
+    |> Api.Blog.User.changeset()
+    |> Api.Repo.insert()
   end
 end

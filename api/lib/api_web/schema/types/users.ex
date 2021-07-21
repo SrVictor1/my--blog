@@ -1,9 +1,10 @@
-defmodule ApiWeb.Schema.Users do
+defmodule ApiWeb.Schema.Types.Users do
   use Absinthe.Schema.Notation
 
   object :users do
     field :name, :string
     field :email, :string
+    field :posts_number, :integer
     field :id, :uuid4
   end
 

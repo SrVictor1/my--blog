@@ -1,5 +1,5 @@
-defmodule ApiWeb.Resolver.GetAllResolver do
+defmodule ApiWeb.Resolver.Posts.GetAllResolver do
   def call(_parent, _args, _resolution) do
-    {:ok, Api.Blog.Posts.GetAll.call()}
+    Api.Blog.Posts.GetAll.call()
   end
 end
