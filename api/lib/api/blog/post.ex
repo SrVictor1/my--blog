@@ -2,14 +2,18 @@ defmodule Api.Blog.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @fields [:autor, :titulo, :img_url, :conteudo]
+  @fields [:user_id, :published, :title, :img_url, :body]
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary
+
   schema "posts" do
-    field :autor, :string
-    field :titulo, :string
+    field :title, :string
     field :img_url, :string
-    field :conteudo, :string
+    field :body, :string
+    field :published, :string
+
+    belongs_to :user, Api.Blog.User
 
     timestamps()
   end
@@ -18,8 +22,5 @@ defmodule Api.Blog.Post do
     %__MODULE__{}
     |> cast(params, @fields)
     |> validate_required(@fields)
-    |> validate_length(:autor, min: 2, max: 15)
-    |> validate_length(:titulo, min: 2, max: 50)
-    |> unique_constraint([:titulo])
   end
 end
