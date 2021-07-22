@@ -15,9 +15,10 @@ defmodule Api.Blog.Users.GetOne do
   defp busca_user(uuid) do
     Repo.get(User, uuid)
     |> case do
-      {:ok, data} ->
-        data
-      _ -> "Not found!"
+      nil ->
+        "Not found!"
+      params ->
+        params
     end
   end
 end

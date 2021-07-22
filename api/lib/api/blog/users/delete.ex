@@ -4,24 +4,15 @@ defmodule Api.Blog.Users.Delete do
 
   def call(id) do
     GetOne.call(id)
-    |> verific_id()
-  end
+    |> case do
+      "invalide UUID!" ->
+        {:error, "uuid4 invalide"}
 
-  defp verific_id(params) do
-    params
-    |> handle()
-  end
+      "Not found!" ->
+        {:error, "user not found!"}
 
-  defp handle(params) when params == "invalide UUID!", do: {:error, "INVALIDO UUID4!"}
-
-  defp handle(params) when params == "Not found!", do: "not found!"
-
-  defp handle(params) when is_bitstring(params) do
-    case Repo.delete(params) do
-      {:ok, params} ->
-        params
-      _ ->
-        {:error, "DB NOT FOUND"}
+      params ->
+        Repo.delete(params)
     end
   end
 end

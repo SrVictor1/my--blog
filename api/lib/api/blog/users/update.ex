@@ -4,15 +4,12 @@ defmodule Api.Blog.Users.Update do
   alias Api.Blog.Users.GetOne
 
   def call(id, params) do
-    Changeset.change(GetOne.call(id), params)
-    |> handle()
-  end
-
-  defp handle(data) when data.valid? === true do
-    Repo.update(data)
-  end
-
-  defp handle(data) when data.valid? === false do
-    "error in"
+    GetOne.call(id)
+    |>Changeset.change(params)
+    |> case do
+      data when data.valid? == true ->
+        Repo.update(data)
+      _ -> "Fali update"
+    end
   end
 end

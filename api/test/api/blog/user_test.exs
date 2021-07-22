@@ -1,4 +1,5 @@
 defmodule Api.Blog.UserTest do
+  alias Api.Blog.Users
   use Api.DataCase, async: true
 
   @valid_params %{
@@ -23,7 +24,7 @@ defmodule Api.Blog.UserTest do
   }
 
   defp create_user_params(params) do
-    Api.Blog.Users.Create.call(params)
+    Users.Create.call(params)
   end
 
   test "create_user/1 with valid data create a user" do
@@ -39,11 +40,20 @@ defmodule Api.Blog.UserTest do
   end
 
   test "delete_user/1 passando um id valido para o delete user" do
+    # Cria um user para deletar
     {:ok, %Api.Blog.User{} = user} = create_user_params(@valid_params)
-    assert %Api.Blog.User{} = Api.Blog.Users.Delete.call(user.id)
+    # Test
+    assert {:ok, %Api.Blog.User{}} = Users.Delete.call(user.id)
   end
 
-  test "delete_user/1 passando um id invalid para o delete user" do
-    assert {:error, "INVALIDO UUID4!"} = Api.Blog.Users.Delete.call("123124125125125213")
+  test "delete_user/1 passando um id de um user invalido para o delete user" do
+    # Testando com um id inexistente
+    assert {:error, "user not found!"} = Users.Delete.call("75f2f29c-2332-4954-b6e0-ff8004ad2b8d")
+  end
+
+  test "update_user/1 passando um params valido para o update user" do
+    {:ok, %Api.Blog.User{} = user} = create_user_params(@valid_params)
+    
+    assert {:ok, %Api.Blog.User{}} = Users.Update.call(user.id, @update_params)
   end
 end
